@@ -1,0 +1,8 @@
+# Cloudflare Pages Redirects for Math Learning Adventure
+
+# SPA routing - serve index.html for all routes
+/*    /index.html   200
+
+# Optional: redirect root variations to main domain
+# https://www.mathahorn.com/*  https://mathahorn.com/:splat  301!
+# http://mathahorn.com/*       https://mathahorn.com/:splat  301!

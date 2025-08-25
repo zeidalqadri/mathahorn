@@ -222,7 +222,7 @@ export class AdaptiveDifficultySystem {
     
     for (let i = 0; i <= accuracies.length - windowSize; i++) {
       const window = accuracies.slice(i, i + windowSize);
-      const windowAccuracy = window.reduce((sum, val) => sum + val, 0) / windowSize;
+      const windowAccuracy = window.reduce((sum: number, val: number) => sum + val, 0) / windowSize;
       consistencyScore += windowAccuracy;
     }
     
