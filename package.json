@@ -5,11 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "build:cf": "next build && cp -r out/* ./",
     "start": "next start", 
-    "lint": "eslint",
-    "deploy": "wrangler pages publish out --project-name=mathahorn",
-    "preview": "wrangler pages dev out --project-name=mathahorn"
+    "lint": "eslint"
   },
   "dependencies": {
     "react": "19.1.0",
@@ -28,7 +25,6 @@
     "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
-    "@eslint/eslintrc": "^3",
-    "wrangler": "^3.0.0"
+    "@eslint/eslintrc": "^3"
   }
 }

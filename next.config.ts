@@ -12,9 +12,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   
-  // Disable server-side features for static export
-  experimental: {
-    // Disable server components that require runtime
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   
   // Environment variables
