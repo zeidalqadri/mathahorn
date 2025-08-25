@@ -24,3 +24,122 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Accessibility Enhancements */
+:root {
+  --font-scale: 1;
+  --text-primary: #374151;
+  --bg-primary: #ffffff;
+  --border-primary: #d1d5db;
+  --motion-duration: 300ms;
+}
+
+/* High Contrast Mode */
+.high-contrast-mode {
+  --text-primary: #000000;
+  --bg-primary: #ffffff;
+  --border-primary: #000000;
+}
+
+.high-contrast-mode * {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+/* Colorblind Support */
+.colorblind-protanopia {
+  filter: url(#protanopia);
+}
+
+.colorblind-deuteranopia {
+  filter: url(#deuteranopia);  
+}
+
+.colorblind-tritanopia {
+  filter: url(#tritanopia);
+}
+
+/* Focus Management */
+*:focus {
+  outline: 3px solid #0ea5e9 !important;
+  outline-offset: 2px !important;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Font Size Scaling */
+body {
+  font-size: calc(1rem * var(--font-scale));
+}
+
+/* Enhanced Link Styles for Accessibility */
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* Button Focus Improvements */
+button:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+
+/* Skip Link for Screen Readers */
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+/* Screen Reader Only Text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Color Blind Filters (SVG filters would be added to HTML) */
+svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

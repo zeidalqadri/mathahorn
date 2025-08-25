@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Settings, BarChart3, Award, User, BookOpen } from 'lucide-react';
+import { Play, Settings, BarChart3, Award, User, BookOpen, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -10,6 +10,7 @@ import { LevelSelector } from '@/components/game/LevelSelector';
 import { ChallengeInterface } from '@/components/game/ChallengeInterface';
 import { ProgressDashboard } from '@/components/dashboard/ProgressDashboard';
 import { RewardSystem } from '@/components/game/RewardSystem';
+import { AccessibilitySettings } from '@/components/accessibility/AccessibilitySettings';
 import { 
   sampleLevels, 
   sampleChallenges, 
@@ -97,6 +98,7 @@ export default function MathLearningGame() {
   const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(null);
   const [playerProgress, setPlayerProgress] = useState<PlayerProgress>(mockPlayerProgress);
   const [completedChallenges, setCompletedChallenges] = useState<string[]>([]);
+  const [showAccessibilitySettings, setShowAccessibilitySettings] = useState(false);
 
   // Get available levels and badges
   const availableLevels = sampleLevels.filter(level => level.ageGroup === selectedAgeGroup);
@@ -323,6 +325,15 @@ export default function MathLearningGame() {
                 <Badge variant="primary" icon={<Award size={14} />}>
                   {playerProgress.totalPointsEarned.toLocaleString()} XP
                 </Badge>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setShowAccessibilitySettings(true)}
+                  leftIcon={<Eye size={16} />}
+                  aria-label="Open accessibility settings"
+                >
+                  Accessibility
+                </Button>
               </div>
             </div>
           </motion.header>
@@ -399,6 +410,12 @@ export default function MathLearningGame() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Accessibility Settings Modal */}
+      <AccessibilitySettings
+        isOpen={showAccessibilitySettings}
+        onClose={() => setShowAccessibilitySettings(false)}
+      />
     </div>
   );
 }
