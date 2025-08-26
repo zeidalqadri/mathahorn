@@ -32,6 +32,17 @@ export const ChallengeInterface: React.FC<ChallengeInterfaceProps> = ({
   const [isCorrect, setIsCorrect] = useState(false);
   const [answered, setAnswered] = useState(false);
 
+  // Reset states when challenge changes
+  useEffect(() => {
+    setSelectedAnswer('');
+    setCurrentHint('');
+    setHintsUsed(0);
+    setTimeRemaining(challenge.timeLimit || 0);
+    setShowFeedback(false);
+    setIsCorrect(false);
+    setAnswered(false);
+  }, [challenge.id, challenge.timeLimit]);
+
   // Timer effect
   useEffect(() => {
     if (!challenge.timeLimit || answered) return;
@@ -67,10 +78,11 @@ export const ChallengeInterface: React.FC<ChallengeInterfaceProps> = ({
     setShowFeedback(true);
     setAnswered(true);
 
-    // Delay the callback to show feedback
+    // Delay the callback to show feedback, then hide modal
     setTimeout(() => {
+      setShowFeedback(false);
       onAnswer(selectedAnswer, timeSpent, hintsUsed);
-    }, 2000);
+    }, 3000);
   };
 
   const handleShowHint = () => {
@@ -301,10 +313,21 @@ export const ChallengeInterface: React.FC<ChallengeInterfaceProps> = ({
               </p>
 
               {challenge.explanation && (
-                <div className="text-left bg-gray-50 p-4 rounded-lg">
+                <div className="text-left bg-gray-50 p-4 rounded-lg mb-4">
                   <p className="text-sm text-gray-700">{challenge.explanation}</p>
                 </div>
               )}
+
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setShowFeedback(false);
+                  onAnswer(selectedAnswer, timeSpent, hintsUsed);
+                }}
+                className="mt-4"
+              >
+                Continue
+              </Button>
             </motion.div>
           </motion.div>
         )}

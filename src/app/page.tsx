@@ -149,24 +149,22 @@ export default function MathLearningGame() {
     }
 
     // Move to next challenge or back to level selection
-    setTimeout(() => {
-      if (currentLevel) {
-        const currentChallengeIndex = currentLevel.challenges.indexOf(currentChallenge.id);
-        if (currentChallengeIndex < currentLevel.challenges.length - 1) {
-          // Next challenge
-          const nextChallengeId = currentLevel.challenges[currentChallengeIndex + 1];
-          const nextChallenge = getChallengeById(nextChallengeId);
-          if (nextChallenge) {
-            setCurrentChallenge(nextChallenge);
-          }
-        } else {
-          // Level completed
-          setGameMode('levels');
-          setCurrentLevel(null);
-          setCurrentChallenge(null);
+    if (currentLevel) {
+      const currentChallengeIndex = currentLevel.challenges.indexOf(currentChallenge.id);
+      if (currentChallengeIndex < currentLevel.challenges.length - 1) {
+        // Next challenge
+        const nextChallengeId = currentLevel.challenges[currentChallengeIndex + 1];
+        const nextChallenge = getChallengeById(nextChallengeId);
+        if (nextChallenge) {
+          setCurrentChallenge(nextChallenge);
         }
+      } else {
+        // Level completed
+        setGameMode('levels');
+        setCurrentLevel(null);
+        setCurrentChallenge(null);
       }
-    }, 3000);
+    }
   };
 
   const navigationItems = [
