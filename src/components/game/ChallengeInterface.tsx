@@ -321,8 +321,9 @@ export const ChallengeInterface: React.FC<ChallengeInterfaceProps> = ({
               <Button
                 variant="primary"
                 onClick={() => {
+                  const currentTimeSpent = Math.round((Date.now() - startTime) / 1000);
                   setShowFeedback(false);
-                  onAnswer(selectedAnswer, timeSpent, hintsUsed);
+                  onAnswer(selectedAnswer, currentTimeSpent, hintsUsed);
                 }}
                 className="mt-4"
               >
